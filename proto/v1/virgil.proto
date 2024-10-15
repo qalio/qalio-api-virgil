@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package virgil.v1;
+
+import "proto/v1/common/utils.proto";
+
+message KYCRequest {
+  string user_id = 1;
+  bytes document = 2;
+  string document_type = 3;
+}
+
+message KYCResponse {
+  string verification_id = 1;
+  string status = 2;
+}
+
+message MobileVerificationRequest {
+  string user_id = 1;
+  string mobile_number = 2;
+}
+
+message MobileVerificationResponse {
+  bool verified = 1;
+}
+
+service KYCService {
+  rpc SubmitKYC(KYCRequest) returns (KYCResponse);
+  rpc VerifyMobileNumber(MobileVerificationRequest) returns (MobileVerificationResponse);
+}
